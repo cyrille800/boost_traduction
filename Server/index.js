@@ -3,7 +3,7 @@ const bodyParses = require('body-parser')
 const cors = require('cors')
 const app = express()
 const mysql = require('mysql')
-const path = require("path")
+
 const db = mysql.createPool({
     host: "localhost",
     user: "root",
@@ -11,14 +11,10 @@ const db = mysql.createPool({
     database: "boostvocabulary",
 })
 
-app.use(express.static(path.join(__dirname,'../build')))
 app.use(cors())
 app.use(express.json())
 app.use(bodyParses.urlencoded({extended: true}))
 
-app.get("/",function(req,res){
-    res.sendFile(path.join(__dirname,'../build','index.html'))
-})
 app.post('/chechMail', (req,res)=>{
 
     const mail = req.body.mail;
